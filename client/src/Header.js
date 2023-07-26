@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 const Header = () => {
-  const { setUserInfo, userInfo} = useContext(UserContext);
+  const { setUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
-    fetch("http://localhost:4000/profile", {
+    fetch(process.env.REACT_APP_BASE_URL + "/profile", {
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
@@ -15,7 +15,7 @@ const Header = () => {
   }, []);
 
   function logout() {
-    fetch("http://localhost:4000/logout", {
+    fetch(process.env.REACT_APP_BASE_URL + "/logout", {
       credentials: "include",
       method: "POST",
     });
@@ -27,7 +27,11 @@ const Header = () => {
   return (
     <header>
       <Link to="/" className="logo">
-        <img src="https://img.freepik.com/free-icon/blogging_318-883190.jpg" width="50px" height="40px" />
+        <img
+          src="https://img.freepik.com/free-icon/blogging_318-883190.jpg"
+          width="50px"
+          height="40px"
+        />
       </Link>
       <nav>
         {username && (
